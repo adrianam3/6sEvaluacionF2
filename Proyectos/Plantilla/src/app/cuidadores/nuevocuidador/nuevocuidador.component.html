@@ -1,0 +1,115 @@
+<div class="card my-5">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-end mb-4">
+        <h3 class="mb-0">
+          {{ titulo }}
+        </h3>
+      </div>
+      <form [formGroup]="frm_Cuidador" (ngSubmit)="grabar()">
+        <div class="row">
+          <div class="form-group mb-3">
+            <label class="form-label" for="nombre">Nombre</label>
+            <input
+              formControlName="nombre"
+              type="text"
+              class="form-control"
+              id="nombre"
+              placeholder="Ingrese el nombre"
+            />
+            @if (frm_Cuidador.get('nombre').invalid && frm_Cuidador.get('nombre').touched) {
+              @if (frm_Cuidador.get('nombre').hasError('required')) {
+                <div>
+                  <small style="color: red">El nombre es requerido</small>
+                </div>
+              }
+            }
+          </div>
+
+          <div class="form-group mb-3">
+            <label class="form-label" for="especialidad">Especialidad</label>
+            <input
+              formControlName="especialidad"
+              type="text"
+              class="form-control"
+              id="especialidad"
+              placeholder="Ingrese la especialidad"
+            />
+            @if (frm_Cuidador.get('especialidad').invalid && frm_Cuidador.get('especialidad').touched) {
+              @if (frm_Cuidador.get('especialidad').hasError('required')) {
+                <div>
+                  <small style="color: red">La especialidad es requerida</small>
+                </div>
+              }
+            }
+          </div>
+  
+          <div class="form-group mb-3">
+            <label class="form-label" for="telefono">Teléfono</label>
+            <input
+              formControlName="telefono"
+              type="text"
+              class="form-control"
+              id="telefono"
+              placeholder="Ingrese el teléfono"
+            />
+            @if (frm_Cuidador.get('telefono').invalid && frm_Cuidador.get('telefono').touched) {
+              @if (frm_Cuidador.get('telefono').hasError('required')) {
+                <div>
+                  <small style="color: red">El teléfono es requerido</small>
+                </div>
+              }
+              @if (frm_Cuidador.get('telefono').hasError('pattern')) {
+                <div>
+                  <small style="color: red">El teléfono debe contener solo números</small>
+                </div>
+              }
+            }
+          </div>
+  
+          <div class="form-group mb-3">
+            <label class="form-label" for="email">Email</label>
+            <input
+              formControlName="email"
+              type="email"
+              class="form-control"
+              id="email"
+              placeholder="Ingrese el email"
+            />
+            @if (frm_Cuidador.get('email').invalid && frm_Cuidador.get('email').touched) {
+              @if (frm_Cuidador.get('email').hasError('required')) {
+                <div>
+                  <small style="color: red">El email es requerido</small>
+                </div>
+              }
+              @if (frm_Cuidador.get('email').hasError('email')) {
+                <div>
+                  <small style="color: red">El formato del email no es válido</small>
+                </div>
+              }
+            }
+          </div>
+  
+          <div class="form-group mb-3">
+            <label class="form-label" for="estado">Estado</label>
+            <select class="form-control" formControlName="estado" id="estado">
+              <option value="1">Activo</option>
+              <option value="0">Inactivo</option>
+            </select>
+            @if (frm_Cuidador.get('estado').invalid && frm_Cuidador.get('estado').touched) {
+              @if (frm_Cuidador.get('estado').hasError('required')) {
+                <div>
+                  <small style="color: red">El estado es requerido</small>
+                </div>
+              }
+            }
+          </div>
+          <div class="d-grid mt-3">
+            <button type="submit" class="btn btn-primary" [disabled]="frm_Cuidador.invalid">
+              Grabar
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  

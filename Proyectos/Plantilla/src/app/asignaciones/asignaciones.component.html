@@ -1,0 +1,58 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card cardTitle="Lista de Asignaciones" blockClass="pc-component">
+      <div class="col-md-12 col-xl-8">
+        <h5 class="mb-3 d-flex justify-content-between">
+          <a href="nuevaasignacion" class="btn btn-outline-dark">Nueva Asignación</a>
+
+          <!-- <a href="imprimirignacion" class="btn btn-outline-dark ms-auto">Imprimir Asignaciones</a> -->
+          <!-- Cambia este botón para llamar al método de impresión -->
+          <button (click)="imprimirAsignaciones()" class="btn btn-outline-dark ms-auto">Imprimir Asignaciones</button>
+        </h5>
+        <div class="card tbl-card">
+          <div class="table-responsive">
+            <table class="table table-hover mb-0">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Niño</th>
+                  <th>Alergia Niño</th>
+                  <th>Cuidador</th>
+                  <th>Especialidad Cuidador</th>
+                  <th>Fecha Asignación</th>
+                  <th>Estado</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (asignacion of listaAsignaciones; track $index) {
+                  <tr>
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ asignacion.nombreNino }}</td>
+                    <td>{{ asignacion.alergiasNino }}</td>
+                    <td>{{ asignacion.nombreCuidador }}</td>
+                    <td>{{ asignacion.especialidadCuidador }}</td>
+                    <td>{{ asignacion.fecha_asignacion }}</td>
+
+                    @if (asignacion.estado == 1) {
+                      <td>Activo</td>
+                    } @else {
+                      <td>Inactivo</td>
+                    }
+
+                    <td>
+                      <button type="button" class="btn btn-outline-success" [routerLink]="['/editarasignacion/', asignacion.asignacion_id]">
+                        Editar
+                      </button>
+                      <button (click)="eliminar(asignacion.asignacion_id)" type="button" class="btn btn-outline-danger">Eliminar</button>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </app-card>
+  </div>
+</div>

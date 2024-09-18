@@ -1,0 +1,59 @@
+<div class="row">
+    <div class="col-sm-12">
+      <app-card cardTitle="Lista de Niños" blockClass="pc-component">
+        <div class="col-md-12 col-xl-8">
+          <h5 class="mb-3">
+            <a href="nuevonino" class="btn btn-outline-dark">Nuevo Niño</a>
+          </h5>
+          <div class="card tbl-card">
+            <div class="table-responsive">
+              <table class="table table-hover mb-0">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Fecha Nacimiento</th>
+                    <th>Alergias</th>
+                    <th>Estado</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (nino of listaNinos; track $index) {
+                    <tr>
+                      <td>{{ $index + 1 }}</td>
+                      <td>{{ nino.nombre }}</td>
+                      <td>{{ nino.apellido }}</td>
+                      <td>{{ nino.fecha_nacimiento }}</td>
+                      <td>{{ nino.alergias }}</td>
+                      
+                      @if (nino.estado == 1) {
+                        <td>Activo</td>
+                      } @else {
+                        <td>Inactivo</td>
+                      }
+  
+                      <td>
+                        <button
+                          type="button"
+                          class="btn btn-outline-success"
+                          [routerLink]="['/editarnino/', nino.nino_id]"
+                        >
+                          Editar
+                        </button>
+                        <button (click)="eliminar(nino.nino_id)" type="button" class="btn btn-outline-danger">
+                          Eliminar
+                        </button>
+                      </td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </app-card>
+    </div>
+  </div>
+  

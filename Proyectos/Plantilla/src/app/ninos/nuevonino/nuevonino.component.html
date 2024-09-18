@@ -1,0 +1,105 @@
+<div class="card my-5">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-end mb-4">
+        <h3 class="mb-0">
+          {{ titulo }}
+        </h3>
+      </div>
+      <form [formGroup]="frm_Nino" (ngSubmit)="grabar()">
+        <div class="row">
+          <div class="form-group mb-3">
+            <label class="form-label" for="nombre">Nombre</label>
+            <input
+              formControlName="nombre"
+              type="text"
+              class="form-control"
+              id="nombre"
+              placeholder="Ingrese el Nombre"
+            />
+            @if (frm_Nino.get('nombre').invalid && frm_Nino.get('nombre').touched) {
+              @if (frm_Nino.get('nombre').hasError('required')) {
+                <div>
+                  <small style="color: red">El Nombre es requerido</small>
+                </div>
+              }
+            }
+          </div>
+  
+          <div class="form-group mb-3">
+            <label class="form-label" for="apellido">Apellido</label>
+            <input
+              formControlName="apellido"
+              type="text"
+              class="form-control"
+              id="apellido"
+              placeholder="Ingrese el Apellido"
+            />
+            @if (frm_Nino.get('apellido').invalid && frm_Nino.get('apellido').touched) {
+              @if (frm_Nino.get('apellido').hasError('required')) {
+                <div>
+                  <small style="color: red">El Apellido es requerido</small>
+                </div>
+              }
+            }
+          </div>
+  
+          <div class="form-group mb-3">
+            <label class="form-label" for="fecha_nacimiento">Fecha de Nacimiento</label>
+            <input
+              formControlName="fecha_nacimiento"
+              type="date"
+              class="form-control"
+              id="fecha_nacimiento"
+            />
+            @if (frm_Nino.get('fecha_nacimiento').invalid && frm_Nino.get('fecha_nacimiento').touched) {
+              @if (frm_Nino.get('fecha_nacimiento').hasError('required')) {
+                <div>
+                  <small style="color: red">La Fecha de Nacimiento es requerida</small>
+                </div>
+              }
+            }
+          </div>
+  
+
+          <div class="form-group mb-3">
+            <label class="form-label" for="alergias">Alergias</label>
+            <input
+              formControlName="alergias"
+              type="text"
+              class="form-control"
+              id="alergias"
+              placeholder="Ingrese las Alergias"
+            />
+          </div>
+  
+
+          <div class="form-group mb-3">
+            <label class="form-label" for="estado">Estado</label>
+            <select class="form-control" formControlName="estado" id="estado">
+              <option value="1">Activo</option>
+              <option value="0">Inactivo</option>
+            </select>
+
+            @if (frm_Nino.get('estado').invalid && frm_Nino.get('estado').touched) {
+              @if (frm_Nino.get('estado').hasError('required')) {
+                <div>
+                  <small style="color: red">El Estado es requerido</small>
+                </div>
+              }
+            }
+          </div>
+  
+          <div class="d-grid mt-3">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="frm_Nino.invalid"
+            >
+              Grabar
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  

@@ -1,37 +1,37 @@
 <?php
-//TODO: Clase de Niños
+//TODO: Clase de Cuidadores
 require_once('../config/config.php');
 
-class Ninos
+class Cuidadores
 {
     //TODO: Implementar los métodos de la clase
 
-    public function todos() //select * from ninos
+    public function todos() //select * from cuidadores
     {
         $con = new ClaseConectar();
         $con = $con->ProcedimientoParaConectar();
-        $cadena = "SELECT * FROM `ninos`";
+        $cadena = "SELECT * FROM `cuidadores`";
         $datos = mysqli_query($con, $cadena);
         $con->close();
         return $datos;
     }
 
-    public function uno($nino_id) //select * from ninos where nino_id = $nino_id
+    public function uno($cuidador_id) //select * from cuidadores where cuidador_id = $cuidador_id
     {
         $con = new ClaseConectar();
         $con = $con->ProcedimientoParaConectar();
-        $cadena = "SELECT * FROM `ninos` WHERE `nino_id`=$nino_id";
+        $cadena = "SELECT * FROM `cuidadores` WHERE `cuidador_id`=$cuidador_id";
         $datos = mysqli_query($con, $cadena);
         $con->close();
         return $datos;
     }
 
-    public function insertar($nombre, $apellido, $fecha_nacimiento, $alergias, $estado) //INSERT INTO `ninos` ...
+    public function insertar($nombre, $especialidad, $telefono, $email, $estado) //INSERT INTO `cuidadores` ...
     {
         try {
             $con = new ClaseConectar();
             $con = $con->ProcedimientoParaConectar();
-            $cadena = "INSERT INTO `ninos` (`nombre`, `apellido`, `fecha_nacimiento`, `alergias`, `estado`) VALUES ('$nombre', '$apellido', '$fecha_nacimiento', '$alergias', '$estado')";
+            $cadena = "INSERT INTO `cuidadores` (`nombre`, `especialidad`, `telefono`, `email`, `estado`) VALUES ('$nombre', '$especialidad', '$telefono', '$email', '$estado')";
             if (mysqli_query($con, $cadena)) {
                 return $con->insert_id;
             } else {
@@ -44,14 +44,14 @@ class Ninos
         }
     }
 
-    public function actualizar($nino_id, $nombre, $apellido, $fecha_nacimiento, $alergias, $estado) //UPDATE `ninos` SET ...
+    public function actualizar($cuidador_id, $nombre, $especialidad, $telefono, $email, $estado) //UPDATE `cuidadores` SET ...
     {
         try {
             $con = new ClaseConectar();
             $con = $con->ProcedimientoParaConectar();
-            $cadena = "UPDATE `ninos` SET `nombre`='$nombre', `apellido`='$apellido', `fecha_nacimiento`='$fecha_nacimiento', `alergias`='$alergias', `estado`='$estado' WHERE `nino_id` = $nino_id";
+            $cadena = "UPDATE `cuidadores` SET `nombre`='$nombre', `especialidad`='$especialidad', `telefono`='$telefono', `email`='$email', `estado`='$estado' WHERE `cuidador_id` = $cuidador_id";
             if (mysqli_query($con, $cadena)) {
-                return $nino_id;
+                return $cuidador_id;
             } else {
                 return $con->error;
             }
@@ -62,34 +62,34 @@ class Ninos
         }
     }
 
-    public function eliminar($nino_id) {
+    public function eliminar($cuidador_id) {
         try {
             $con = new ClaseConectar();
             $con = $con->ProcedimientoParaConectar();
     
-            // Verificar si existen asignaciones relacionadas con el niño
-            $query = "SELECT COUNT(*) as total FROM asignaciones WHERE nino_id = $nino_id";
+            // Verificar si existen asignaciones relacionadas con el cuidador
+            $query = "SELECT COUNT(*) as total FROM asignaciones WHERE cuidador_id = $cuidador_id";
             $result = mysqli_query($con, $query);
             $row = mysqli_fetch_assoc($result);
     
             if ($row['total'] > 0) {
-                // Si el niño tiene asignaciones, devolver un mensaje de error
+                // Si el cuidador tiene asignaciones, devolver un mensaje de error
                 return [
                     'status' => 'error',
-                    'message' => 'No se puede eliminar al niño porque tiene asignaciones asociadas.'
+                    'message' => 'No se puede eliminar al cuidador porque tiene asignaciones asociadas.'
                 ];
             } else {
                 // Si no tiene asignaciones, proceder con la eliminación
-                $cadena = "DELETE FROM ninos WHERE nino_id = $nino_id";
+                $cadena = "DELETE FROM cuidadores WHERE cuidador_id = $cuidador_id";
                 if (mysqli_query($con, $cadena)) {
                     return [
                         'status' => 'success',
-                        'message' => 'El niño ha sido eliminado correctamente.'
+                        'message' => 'El cuidador ha sido eliminado correctamente.'
                     ];
                 } else {
                     return [
                         'status' => 'error',
-                        'message' => 'Error al intentar eliminar el niño.'
+                        'message' => 'Error al intentar eliminar el cuidador.'
                     ];
                 }
             }
@@ -103,15 +103,12 @@ class Ninos
         }
     }
     
-
-
-
-    // public function eliminar($nino_id) //DELETE FROM `ninos` WHERE nino_id = ...
+    // public function eliminar($cuidador_id) //DELETE FROM `cuidadores` WHERE cuidador_id = ...
     // {
     //     try {
     //         $con = new ClaseConectar();
     //         $con = $con->ProcedimientoParaConectar();
-    //         $cadena = "DELETE FROM `ninos` WHERE `nino_id`= $nino_id";
+    //         $cadena = "DELETE FROM `cuidadores` WHERE `cuidador_id`= $cuidador_id";
     //         if (mysqli_query($con, $cadena)) {
     //             return 1;
     //         } else {
